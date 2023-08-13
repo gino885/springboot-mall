@@ -1,5 +1,6 @@
 package com.gino.springbootmall.rowmapper;
 
+import com.gino.springbootmall.constant.ProductCategory;
 import com.gino.springbootmall.madel.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,7 +15,13 @@ public class ProductRowMapper implements RowMapper<Product> {
 
         product.setProduct_id(resultSet.getInt("product_id"));
         product.setProduct_name(resultSet.getString("product_name"));
-        product.setCategory(resultSet.getString("category"));
+
+        String categoryStr = resultSet.getString("category");
+        ProductCategory category = ProductCategory.valueOf(categoryStr);
+        product.setCategory(category);
+
+       // product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
+
         product.setDescription(resultSet.getString("description"));
         product.setImage_url(resultSet.getString("image_url"));
         product.setPrice(resultSet.getInt("price"));
