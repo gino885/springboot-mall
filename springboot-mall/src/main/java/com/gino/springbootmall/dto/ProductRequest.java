@@ -1,28 +1,28 @@
-package com.gino.springbootmall.madel;
+package com.gino.springbootmall.dto;
 
 import com.gino.springbootmall.constant.ProductCategory;
 
-import java.sql.Date;
+import javax.validation.constraints.NotNull;
 
-public class Product {
+public class ProductRequest {
 
-    private Integer product_id;
+    @NotNull
     private String product_name;
+
+    @NotNull
     private ProductCategory category;
+
+    @NotNull
     private String image_url;
+
+    @NotNull
     private Integer price;
+
+    @NotNull
     private Integer stock;
+
+    @NotNull
     private String description;
-    private java.sql.Date created_date;
-    private java.sql.Date last_modified_date;
-
-    public Integer getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
-    }
 
     public String getProduct_name() {
         return product_name;
@@ -70,21 +70,5 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getCreated_date() {
-        return created_date;
-    }
-
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
-    }
-
-    public Date getLast_modified_date() {
-        return last_modified_date;
-    }
-
-    public void setLast_modified_date(Date last_modified_date) {
-        this.last_modified_date = last_modified_date;
     }
 }
