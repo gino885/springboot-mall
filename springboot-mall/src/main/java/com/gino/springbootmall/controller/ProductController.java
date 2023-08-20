@@ -10,12 +10,21 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @GetMapping("/products")
+    public ResponseEntity<List<Product>> getProducts(){
+        List<Product> productList = productService.getProducts();
+
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+    }
+
 
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId) {
