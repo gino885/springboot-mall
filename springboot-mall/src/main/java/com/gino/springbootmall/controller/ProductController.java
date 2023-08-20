@@ -37,4 +37,25 @@ public class ProductController {
            return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
+                                                 @RequestBody @Valid ProductRequest productRequest){
+       Product product = productService.getProductById(productId);
+
+       if(product == null){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+       }
+
+       productService.updateProduct(productId,productRequest);
+
+       Product updatedProduct = productService.getProductById(productId);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+    }
+
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Integer productId){
+        productService.deleteProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
