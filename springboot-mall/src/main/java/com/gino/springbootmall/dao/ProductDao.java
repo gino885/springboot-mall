@@ -1,16 +1,15 @@
 package com.gino.springbootmall.dao;
 
-import com.gino.springbootmall.constant.ProductCategory;
+import com.gino.springbootmall.dto.ProductQueryParams;
 import com.gino.springbootmall.dto.ProductRequest;
 import com.gino.springbootmall.madel.Product;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
 public interface ProductDao {
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 
