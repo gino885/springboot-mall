@@ -1,10 +1,12 @@
 package com.gino.springbootmall.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UseRegisterRequest {
 
     @NotBlank
+    @Email
     private String email;
     @NotBlank
     private String password;
