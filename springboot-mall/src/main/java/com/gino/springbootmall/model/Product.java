@@ -1,4 +1,4 @@
-package com.gino.springbootmall.madel;
+package com.gino.springbootmall.model;
 
 import com.gino.springbootmall.constant.ProductCategory;
 

@@ -3,7 +3,7 @@ package com.gino.springbootmall.service.impl;
 import com.gino.springbootmall.dao.ProductDao;
 import com.gino.springbootmall.dto.ProductQueryParams;
 import com.gino.springbootmall.dto.ProductRequest;
-import com.gino.springbootmall.madel.Product;
+import com.gino.springbootmall.model.Product;
 import com.gino.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

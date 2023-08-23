@@ -1,7 +1,7 @@
 package com.gino.springbootmall.rowmapper;
 
 import com.gino.springbootmall.constant.ProductCategory;
-import com.gino.springbootmall.madel.Product;
+import com.gino.springbootmall.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

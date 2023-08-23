@@ -2,7 +2,7 @@ package com.gino.springbootmall.service;
 
 import com.gino.springbootmall.dto.ProductQueryParams;
 import com.gino.springbootmall.dto.ProductRequest;
-import com.gino.springbootmall.madel.Product;
+import com.gino.springbootmall.model.Product;
 
 import java.util.List;
 

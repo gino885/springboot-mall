@@ -3,7 +3,7 @@ package com.gino.springbootmall.controller;
 import com.gino.springbootmall.constant.ProductCategory;
 import com.gino.springbootmall.dto.ProductQueryParams;
 import com.gino.springbootmall.dto.ProductRequest;
-import com.gino.springbootmall.madel.Product;
+import com.gino.springbootmall.model.Product;
 import com.gino.springbootmall.service.ProductService;
 import com.gino.springbootmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
