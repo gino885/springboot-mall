@@ -1,6 +1,7 @@
 package com.gino.springbootmall.controller;
 
 import com.gino.springbootmall.dto.UseRegisterRequest;
+import com.gino.springbootmall.dto.UserLoginRequest;
 import com.gino.springbootmall.model.User;
 import com.gino.springbootmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,12 @@ public class UserController {
         User user = userService.getUserById(userId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest){
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }

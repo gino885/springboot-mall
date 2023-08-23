@@ -2,6 +2,7 @@ package com.gino.springbootmall.service.impl;
 
 import com.gino.springbootmall.dao.UserDao;
 import com.gino.springbootmall.dto.UseRegisterRequest;
+import com.gino.springbootmall.dto.UserLoginRequest;
 import com.gino.springbootmall.model.User;
 import com.gino.springbootmall.service.UserService;
 import org.slf4j.Logger;
@@ -18,6 +19,26 @@ public class UserServiceimpl implements UserService {
 
     @Autowired
    private UserDao userDao;
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if(user == null){
+            log.warn("該email {} 尚未註冊", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        //== 是同一個物件才行 像1 = 1 但new s1 != new s2 而是s1.equals(s2)
+        if(user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }
+        else {
+            log.warn("email {} 的密碼不正確", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
     @Override
     public Integer register(UseRegisterRequest useRegisterRequest) {
