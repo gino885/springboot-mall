@@ -1,10 +1,8 @@
 package com.gino.springbootmall.dao.impl;
 
 import com.gino.springbootmall.dao.UserDao;
-import com.gino.springbootmall.dto.UseRegisterRequest;
-import com.gino.springbootmall.model.Product;
+import com.gino.springbootmall.dto.UserRegisterRequest;
 import com.gino.springbootmall.model.User;
-import com.gino.springbootmall.rowmapper.ProductRowMapper;
 import com.gino.springbootmall.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -61,13 +59,13 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    public Integer createUser(UseRegisterRequest useRegisterRequest){
+    public Integer createUser(UserRegisterRequest userRegisterRequest){
         String sql = "INSERT INTO user(email, password, created_date, last_modified_date) " +
                 "VALUES (:email, :password, :createdDate, :lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("email", useRegisterRequest.getEmail());
-        map.put("password", useRegisterRequest.getPassword());
+        map.put("email", userRegisterRequest.getEmail());
+        map.put("password", userRegisterRequest.getPassword());
 
         Date now = new Date();
         map.put("createdDate", now);

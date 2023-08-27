@@ -3,7 +3,7 @@ package com.gino.springbootmall.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class UseRegisterRequest {
+public class UserRegisterRequest {
 
     @NotBlank
     @Email

@@ -1,6 +1,6 @@
 package com.gino.springbootmall.controller;
 
-import com.gino.springbootmall.dto.UseRegisterRequest;
+import com.gino.springbootmall.dto.UserRegisterRequest;
 import com.gino.springbootmall.dto.UserLoginRequest;
 import com.gino.springbootmall.model.User;
 import com.gino.springbootmall.service.UserService;
@@ -20,8 +20,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users/register")
-    public ResponseEntity<User> register(@RequestBody @Valid UseRegisterRequest useRegisterRequest){
-        Integer userId = userService.register(useRegisterRequest);
+    public ResponseEntity<User> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest){
+        Integer userId = userService.register(userRegisterRequest);
 
         User user = userService.getUserById(userId);
 

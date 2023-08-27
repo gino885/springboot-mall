@@ -1,7 +1,7 @@
 package com.gino.springbootmall.service.impl;
 
 import com.gino.springbootmall.dao.UserDao;
-import com.gino.springbootmall.dto.UseRegisterRequest;
+import com.gino.springbootmall.dto.UserRegisterRequest;
 import com.gino.springbootmall.dto.UserLoginRequest;
 import com.gino.springbootmall.model.User;
 import com.gino.springbootmall.service.UserService;
@@ -46,20 +46,20 @@ public class UserServiceimpl implements UserService {
     }
 
     @Override
-    public Integer register(UseRegisterRequest useRegisterRequest) {
+    public Integer register(UserRegisterRequest userRegisterRequest) {
         //檢查註冊的email
-        User user = userDao.getUserByEmail(useRegisterRequest.getEmail());
+        User user = userDao.getUserByEmail(userRegisterRequest.getEmail());
 
         if(user != null){
-            log.warn("該email {} 已被註冊", useRegisterRequest.getEmail());
+            log.warn("該email {} 已被註冊", userRegisterRequest.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
         //使用 MD5 生成密碼的雜湊值
-        String hashedPassword = DigestUtils.md5DigestAsHex(useRegisterRequest.getPassword().getBytes());
-        useRegisterRequest.setPassword(hashedPassword);
+        String hashedPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
+        userRegisterRequest.setPassword(hashedPassword);
 
-        return userDao.createUser(useRegisterRequest);
+        return userDao.createUser(userRegisterRequest);
     }
 
     @Override
