@@ -1,6 +1,7 @@
 package com.gino.springbootmall.dao.impl;
 
 import com.gino.springbootmall.dao.OrderDao;
+import com.gino.springbootmall.dto.OrderQueryParam;
 import com.gino.springbootmall.model.Order;
 import com.gino.springbootmall.model.OrderItem;
 import com.gino.springbootmall.rowmapper.OrderItemRowMapper;
@@ -19,6 +20,34 @@ public class OderDaoImpl implements OrderDao {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    @Override
+    public List<Order> getOrders(OrderQueryParam orderQueryParam) {
+        String sql = "SELECT order_id, user_id, total_amount, created_date, last_modified_date FROM `order` WHERE 1=1";
+        Map<String, Object> map = new HashMap<>();
+
+        sql = addFilteringSql(sql, map , orderQueryParam);
+
+        sql = sql + " ORDER BY created_date DESC";
+
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", orderQueryParam.getLimit());
+        map.put("offset", orderQueryParam.getOffset());
+
+        List<Order> orderList = namedParameterJdbcTemplate.query(sql, map, new OrderRowMapper());
+
+        return orderList;
+    }
+
+    @Override
+    public Integer countOrder(OrderQueryParam orderQueryParam) {
+            String sql = "SELECT count(*) FROM `order` WHERE 1=1";
+            Map<String, Object> map = new HashMap<>();
+            sql = addFilteringSql(sql, map , orderQueryParam);
+
+            Integer total = namedParameterJdbcTemplate.queryForObject(sql,map,Integer.class);
+            return total;
+        }
 
     @Override
     public Order getOrderById(Integer orderId) {
@@ -93,5 +122,12 @@ public class OderDaoImpl implements OrderDao {
         }
 
         namedParameterJdbcTemplate.batchUpdate(sql, parameterSources);
+    }
+    private String addFilteringSql(String sql, Map<String, Object> map, OrderQueryParam orderQueryParam){
+        if(orderQueryParam.getUserId() !=null){
+            sql = sql + " AND user_id = :userId";
+            map.put("userId", orderQueryParam.getUserId());
+        }
+        return sql;
     }
 }

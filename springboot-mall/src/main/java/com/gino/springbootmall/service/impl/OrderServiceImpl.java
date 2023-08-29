@@ -5,6 +5,7 @@ import com.gino.springbootmall.dao.ProductDao;
 import com.gino.springbootmall.dao.UserDao;
 import com.gino.springbootmall.dto.BuyItem;
 import com.gino.springbootmall.dto.CreateOrderRequest;
+import com.gino.springbootmall.dto.OrderQueryParam;
 import com.gino.springbootmall.model.Order;
 import com.gino.springbootmall.model.OrderItem;
 import com.gino.springbootmall.model.Product;
@@ -88,5 +89,23 @@ public class OrderServiceImpl implements OrderService {
 
         orderDao.createOrderItems(orderId, orderItemList);
         return orderId;
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParam orderQueryParam) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParam);
+
+        for(Order order:orderList){
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+
+            order.setOrderItemList(orderItemList);
+        }
+        return orderList;
+    }
+
+    @Override
+    public Integer countOrder(OrderQueryParam orderQueryParam) {
+
+        return orderDao.countOrder(orderQueryParam);
     }
 }
